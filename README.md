@@ -80,7 +80,7 @@ Enable and Configure Transformation
 1. Create Tranform
 ```
 vault write transform/transformation/creditcard-numeric \
-type=fpe
+type=fpe \
 template=builtin/creditcardnumber \
 allowed_roles=payments \
 tweak_source=internal
