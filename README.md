@@ -118,12 +118,12 @@ alphabet="0123456789._%+~#@&/,=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVW
 vault write transform/template/creditcard-to-symbolnumericalpha \
 type=regex \
 pattern='([0-9A-Z._%+~#@&/,=$]{4})-([0-9A-Z._%+~#@&/,=$]{4})-([0-9A-Z._%+~#@&/,=$]{4})-([0-9A-Z._%+~#@&/,=$]{4})' \
-alphabet=symbolnumeric
+alphabet=symbolnumericalpha
 ```
 
 3. Create Transform
 ```
-vault write transform/transformation/creditcard-symbolnumericalpha \
+vault write transform/transformation/creditcard-to-symbolnumericalpha \
 type=fpe \
 template=creditcard-to-symbolnumericalpha \
 tweak_source=internal \
@@ -154,11 +154,11 @@ value=B7Y9-YMEZ-GO4J-H7QG
 
 ```
 vault write transform/encode/payments \
-transformation=transform-to-symbolnumeric \
+transformation=creditcard-to-symbolnumericalpha \
 value=1234-4321-5678-4567
 
 vault write transform/decode/payments \
-transformation=transform-to-symbolnumeric \
+transformation=creditcard-to-symbolnumericalpha \
 value="141@-8@/5-=,+1-064."
 ```
 
@@ -166,7 +166,7 @@ value="141@-8@/5-=,+1-064."
 
 1. Create Alphabet
 ```
-vault write transform/alphabet/symbolnumericalpha \
+vault write transform/alphabet/localemialaddress \
 alphabet=".@0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 ```
 
@@ -174,7 +174,7 @@ alphabet=".@0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 ```
 vault write transform/template/email-exdomain \
 type=regex \
-pattern='.([0-9A-Za-z]{1,100})@.*'
+pattern='.([0-9A-Za-z]{1,100})@.*' \
 alphabet=localemailaddress
 ```
 
