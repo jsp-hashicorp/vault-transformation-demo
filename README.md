@@ -48,7 +48,7 @@ $ vault write database/roles/role-demoapp \
   default_ttl="5h" \
   max_ttl="5h"
 
-$ vault write database/config/mysql-handson-db 
+$ vault write database/config/mysql-handson-db \
   plugin_name=mysql-legacy-database-plugin \
   connection_url="{{username}}:{{password}}@tcp(127.0.0.1:3306)/" \
   allowed_roles="role-demoapp" \
